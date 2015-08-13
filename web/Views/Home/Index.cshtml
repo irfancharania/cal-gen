@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Arbitrary Interval Calendar Generator for iCal Compatible Calendars";
+    @model web.Models.CalendarViewModel
+}
+
+<div class="well well-lg text-center">
+    <h1>Arbitrary Interval Calendar Generator <small><em>for iCal compatible calendars</em></small></h1>
+    <hr />
+    <form method="get" action="../api/Calendar" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-2">
+                @Html.EnumDropDownListFor(x => x.type, new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(x => x.num, new { @class = "control-label col-sm-2" })
+            <div class="col-sm-2">
+                @Html.TextBoxFor(x => x.num, new { @class = "form-control", @type = "number", @min = "0", @max = "60", @maxlength = 2, @placeholder = "0" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.dt, new { @class = "control-label col-sm-offset-3 col-sm-2" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.dt, new { @class = "form-control", @type = "date", @min = DateTime.Now.AddYears(-2), @max = DateTime.Now.AddYears(2), @maxlength = 2 })
+            </div>
+        </div>
+        <div class="form-group">
+            <strong class="control-label col-sm-offset-3 col-sm-2">create</strong>
+            <div class="col-sm-2">
+                @Html.TextBoxFor(x => x.occurrence, new { @class = "form-control", @type = "number", @min = "1", @max = "60", @maxlength = 2, @placeholder = "53" })
+            </div>
+            <strong class="control-label col-sm-2 text-left">entries</strong>
+        </div>
+        <div class="form-group top-pad">
+            <div class="col-sm-12">
+                <input id="submit" type="submit" value="submit" class="btn btn-lg btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2><span class="glyphicon glyphicon-calendar"></span> Overview</h2>
+        <p>You require counting weeks/months where the interval starts on an arbitrary date.</p>
+        <h2><span class="glyphicon glyphicon-heart"></span> Inspired by</h2>
+        <p><a href="http://optics.eee.nottingham.ac.uk/matt/weeknumbers/weeknumbers_form.php">Matt's arbitrary week number generator</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2><span class="glyphicon glyphicon-list"></span> Instructions</h2>
+        <ol>
+            <li>Choose interval type (month/week)</li>
+            <li>Enter interval number start date will represent</li>
+            <li>Enter start date</li>
+            <li>Enter number of calendar entries required</li>
+            <li>Click <strong>submit</strong> to download calendar file</li>
+            <li>Import file into your calendar<br /> For Google Calendar, create a new calendar and then import there</li>
+        </ol>
+    </div>
+</div>
